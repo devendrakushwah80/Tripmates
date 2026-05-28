@@ -1,0 +1,88 @@
+{
+  "info": {
+    "name": "TripMates Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {"key": "base_url", "value": "http://localhost/tripmates_backend"},
+    {"key": "access_token", "value": ""},
+    {"key": "refresh_token", "value": ""},
+    {"key": "user_id", "value": ""}
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": {"method": "GET", "url": "{{base_url}}/health.php"}
+    },
+    {
+      "name": "Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"full_name\":\"Test User\",\"email\":\"test@example.com\",\"phone\":\"+919999999999\",\"password\":\"Password@123\",\"role\":\"driver\",\"device_info\":\"Pixel\"}"},
+        "url": "{{base_url}}/register.php"
+      }
+    },
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"login\":\"test@example.com\",\"password\":\"Password@123\",\"device_info\":\"Pixel\"}"},
+        "url": "{{base_url}}/login.php"
+      }
+    },
+    {
+      "name": "Verify OTP",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"user_id\":\"{{user_id}}\",\"otp\":\"123456\",\"purpose\":\"phone_verification\"}"},
+        "url": "{{base_url}}/verify_otp.php"
+      }
+    },
+    {
+      "name": "Me",
+      "request": {
+        "method": "GET",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": "{{base_url}}/me.php"
+      }
+    },
+    {
+      "name": "Upload Profile",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "body": {"mode": "formdata", "formdata": [{"key": "profile_photo", "type": "file", "src": ""}]},
+        "url": "{{base_url}}/upload_profile.php"
+      }
+    },
+    {
+      "name": "Vehicle Details",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"car_model\":\"Swift\",\"car_color\":\"White\",\"seat_count\":4,\"rc_number\":\"KA01AB1234\"}"},
+        "url": "{{base_url}}/vehicle_details.php"
+      }
+    },
+    {
+      "name": "Complete Profile",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}],
+        "url": "{{base_url}}/complete_profile.php"
+      }
+    },
+    {
+      "name": "Logout",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Authorization", "value": "Bearer {{access_token}}"}, {"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\"refresh_token\":\"{{refresh_token}}\"}"},
+        "url": "{{base_url}}/logout.php"
+      }
+    }
+  ]
+}
